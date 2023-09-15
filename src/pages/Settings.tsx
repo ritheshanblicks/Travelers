@@ -89,7 +89,7 @@ const Settings: React.FC = () => {
             <textarea style={{ width: '250px', minHeight: '200px' }} />
           </div>
           <div style={{ marginRight: '20%' }}>
-            <Button
+            {/* <Button
               variant="contained"
               style={{
                 backgroundColor: 'rgb(245, 0, 2)',
@@ -98,7 +98,7 @@ const Settings: React.FC = () => {
               }}
             >
               EDIT
-            </Button>
+            </Button> */}
             <Button
               variant="contained"
               style={{

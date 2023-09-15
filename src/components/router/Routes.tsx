@@ -42,7 +42,10 @@ const Routes: React.FC = () => {
     <>
       <ToastContainer hideProgressBar={true} autoClose={2500} />
       <div id="dd-global-loader"></div>
-      <div className="container-inner page-content">
+      <div
+        className="container-inner page-content"
+        style={{ backgroundColor: 'lightgray' }}
+      >
         <Suspense fallback={<Loader />}>
           <Switch>
             {ROUTES.map((route, i: number) => {

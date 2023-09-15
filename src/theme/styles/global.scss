@@ -3054,16 +3054,6 @@ video {
   font-weight: var(--fw-eb);
 }
 
-.active-tab{
-  color: #f50002 !important;
-  border-bottom: 2px solid #f50002;
-  border-radius: 0px;
-}
-
-.home-title {
-  font-size: 30px;
-}
-
 .font-normal {
   font-weight: var(--fw-n);
 }
@@ -3074,10 +3064,6 @@ video {
 
 .text-nc-4 {
   color: var(--nc-4);
-}
-
-.text-nc-5 {
-  color: var(--nc-5);
 }
 
 .text-pc-1 {
@@ -3226,7 +3212,6 @@ body {
 .container-inner {
   flex: 1 1 0%;
   overflow-y: auto;
-  background-color: #d3d3d3;
 }
 
 .page-content-left {

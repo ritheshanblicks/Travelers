@@ -6,6 +6,7 @@ import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
 import { Button, Grid, TextField } from '@material-ui/core';
+import { createUserStory } from '../common/services/createUserStoryService';
 
 const ITEM_HEIGHT = 48;
 const ITEM_PADDING_TOP = 8;
@@ -56,6 +57,12 @@ const UserStory: React.FC = () => {
       // On autofill we get a stringified value.
       typeof value === 'string' ? value.split(',') : value
     );
+  };
+  const onGenerate = () => {
+    const result = createUserStory(
+      '"""\nYou a product ownser at an insurance company. You task is to generate the user stories for the feature in <>.\n\nGuidelines: \n- Base your userstories on the context if its available\n- Create User stories based on INVEST framework\n- Create the user stories by following the output format\n\nOutput Format: \n\nUser story name: ```Name of the user story```\nTasks: ```tasks that are associated with the user story```\nAcceptance criteria: ```Provide 2-3 acceptance criteria```\n\nFollow the same format for each of the user story\n\nContext: \nProject is similar to facebook\n\n<Like/Dislike feature implementation>"""'
+    );
+    console.log(result);
   };
   return (
     <div className="dt">
@@ -133,6 +140,7 @@ const UserStory: React.FC = () => {
                   color: '#fff',
                   float: 'right',
                 }}
+                onClick={onGenerate}
               >
                 GENERATE
               </Button>

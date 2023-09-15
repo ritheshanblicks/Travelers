@@ -33,7 +33,7 @@ function BiHeader() {
           />
         </a>
         <span className="middle-line"></span>
-        <h2 className="text-18 font-extra-bold text-nc-3">Task Muse</h2>
+        <h2 className="text-18 font-extra-bold text-nc-3">Task Muse </h2>
       </div>
 
       <div className="right">
