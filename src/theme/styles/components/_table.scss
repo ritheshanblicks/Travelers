@@ -1,0 +1,9 @@
+.MuiTable-root {
+  .MuiTableHead-root {
+    @apply bg-nc-6;
+    .MuiTableCell-root {
+      @apply font-roboto;
+      font-weight: bold;
+    }
+  }
+}

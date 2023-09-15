@@ -1,0 +1,59 @@
+.dt {
+  .inner-top-section {
+    .dt_website {
+      @apply text-16;
+      color: blue;
+    }
+  }
+  .restaurant-img {
+    @apply w-full mt-18;
+  }
+  .dd_ans {
+    @apply text-16 mt-18;
+  }
+  .search-container {
+    @apply mb-16 pb-20;
+    border-bottom: 1px solid gray;
+  }
+  .input-field {
+    box-shadow: 0px 3px 10px 0px rgb(0 0 0 / 10%);
+  }
+  .dt_inner {
+    // display: flex;
+    height: 100%;
+    .dd_inner_left {
+      // width: 30%;
+      background-color: #f1f1f1;
+      box-shadow: 0px 2px 5px 0px #0000001a;
+      @apply p-20;
+    }
+    .dd_inner_right {
+      @apply p-20;
+      // width: 70%;
+
+      .ref-text {
+        @apply mb-24;
+        .title {
+          @apply text-16 font-extra-bold;
+        }
+      }
+
+      .card {
+        border-radius: 4px;
+        box-shadow: 0px 3px 10px 0px #0000001a;
+        @apply text-16 p-10 mb-14 border border-solid border-nc-6;
+      }
+
+      .eye-icon {
+        float: right
+      }
+
+      .test-content {
+        word-wrap: break-word
+      }
+    }
+    .dt_tabpanel {
+      @apply py-20;
+    }
+  }
+}

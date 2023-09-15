@@ -1,0 +1,66 @@
+.header {
+    @apply flex justify-between items-center px-18;
+    box-shadow: 0px 3px 10px 0px #0000001a;
+
+    .left {
+        @apply flex h-[60px] items-center;
+
+        .middle-line {
+            @apply w-1 h-40 bg-nc-6 inline-block mx-20;
+        }
+
+        .navbar {
+            @apply flex;
+
+            li {
+                @apply flex;
+
+                a {
+                    @apply font-barlow text-12 px-16 py-6 bg-nc-7 rounded-2 mr-6 text-nc-3 items-center cursor-pointer font-bold;
+
+                    &.active,
+                    &:hover,
+                    &:focus {
+                        @apply bg-tint-sc-1-3 text-sc-1;
+                    }
+                }
+
+                span {
+                    @apply pr-6 text-14;
+                }
+            }
+        }
+    }
+
+    .right {
+        @apply flex;
+
+        .badge-number {
+            @apply bg-tc-4 rounded-full absolute text-10 px-2 text-nc-7 h-14 w-24;
+            right: 0px;
+            bottom: 22px;
+        }
+
+        .middle-line {
+            @apply w-1 h-40 bg-nc-6 inline-block mr-12;
+        }
+    }
+
+    .profile {
+        @apply p-0;
+    }
+}
+
+.elepsis {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.profile-navigation{
+    ul{
+        li{
+            @apply px-14 py-10 border-b border-nc-6;
+        }
+    }
+}

@@ -1,0 +1,47 @@
+$icons: (
+  'add': '\e900',
+  'add_rules': '\e901',
+  'back_arrow': '\e902',
+  'change_password': '\e903',
+  'close': '\e904',
+  'dashboard': '\e905',
+  'down_cheveron': '\e906',
+  'duplicate': '\e907',
+  'expectations': '\e908',
+  'help': '\e909',
+  'info': '\e90a',
+  'logout': '\e90b',
+  'mandatory_off': '\e90c',
+  'mandatory_on': '\e90d',
+  'menu_dots': '\e90e',
+  'notification': '\e90f',
+  'password': '\e910',
+  'projects': '\e911',
+  'search': '\e912',
+  'suites': '\e913',
+  'text_delete': '\e914',
+  'up_cheveron': '\e915',
+  'username': '\e916',
+  'shettings': '\e917',
+  'dataset': '\e918',
+  'assistant': '\e919',
+);
+
+@each $name, $glyph in $icons {
+  .dq-icon-#{$name}:before {
+    display: inline-block;
+    font-family: 'dq' !important;
+    content: $glyph;
+
+    /* use !important to prevent issues with browser extensions that change fonts */
+    speak: none;
+    font-style: normal;
+    font-weight: normal;
+    font-variant: normal;
+    text-transform: none;
+
+    /* Better Font Rendering =========== */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+}

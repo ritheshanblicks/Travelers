@@ -1,0 +1,26 @@
+.notification{
+    .repeate-loop{
+        @apply flex grid-cols-1  border-b border-nc-6 py-10;
+        &:first-child{
+            @apply pt-0;
+        }
+        .image{
+            margin-right: 8px;
+            width: 60px;
+            img{
+                @apply w-32;
+            }
+        }
+        .notification-body{
+            p{
+                @apply font-roboto text-12 text-nc-1;
+                b{
+                    @apply font-extra-bold;
+                }
+            }
+            span{
+                @apply font-roboto font-normal;
+            }
+        }
+    }
+}

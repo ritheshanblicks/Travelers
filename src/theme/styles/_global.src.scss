@@ -1,0 +1,143 @@
+@import 'variables/_index.scss';
+@import 'components/_index.scss';
+@import 'tailwind/_index.scss';
+
+:root {
+  /* Primary Color */
+  --pc-1: #{$pc-1};
+
+  /* Secondary Color */
+  --sc-1: #{$sc-1};
+
+  /* Tertiary  color */
+  --tc-1: #{$tc-1};
+  --tc-2: #{$tc-2};
+  --tc-3: #{$tc-3};
+  --tc-4: #{$tc-4};
+
+  /* Neutral  color */
+  --nc-1: #{$nc-1};
+  --nc-2: #{$nc-2};
+  --nc-3: #{$nc-3};
+  --nc-4: #{$nc-4};
+  --nc-5: #{$nc-5};
+  --nc-6: #{$nc-6};
+  --nc-7: #{$nc-7};
+
+  /* Tint Color */
+  --tint-pc-1-1: #{$tint-pc-1-1};
+  --tint-pc-1-2: #{$tint-pc-1-2};
+  --tint-pc-1-3: #{$tint-pc-1-3};
+  --tint-pc-1-1-rgba: #{$tint-pc-1-1-rgba};
+  --tint-pc-1-2-rgba: #{$tint-pc-1-2-rgba};
+  --tint-pc-1-3-rgba: #{$tint-pc-1-3-rgba};
+
+  --tint-sc-1-1: #{$tint-sc-1-1};
+  --tint-sc-1-2: #{$tint-sc-1-2};
+  --tint-sc-1-3: #{$tint-sc-1-3};
+  --tint-sc-1-1-rgba: #{$tint-sc-1-1-rgba};
+  --tint-sc-1-2-rgba: #{$tint-sc-1-2-rgba};
+  --tint-sc-1-3-rgba: #{$tint-sc-1-3-rgba};
+
+  --tint-tc-1-1: #{$tint-tc-1-1};
+  --tint-tc-1-2: #{$tint-tc-1-2};
+  --tint-tc-1-3: #{$tint-tc-1-3};
+  --tint-tc-1-1-rgba: #{$tint-tc-1-1-rgba};
+  --tint-tc-1-2-rgba: #{$tint-tc-1-2-rgba};
+  --tint-tc-1-3-rgba: #{$tint-tc-1-3-rgba};
+
+  --tint-tc-2-1: #{$tint-tc-2-1};
+  --tint-tc-2-2: #{$tint-tc-2-2};
+  --tint-tc-2-3: #{$tint-tc-2-3};
+  --tint-tc-2-1-rgba: #{$tint-tc-2-1-rgba};
+  --tint-tc-2-2-rgba: #{$tint-tc-2-2-rgba};
+  --tint-tc-2-3-rgba: #{$tint-tc-2-3-rgba};
+
+  --tint-tc-3-1: #{$tint-tc-3-1};
+  --tint-tc-3-2: #{$tint-tc-3-2};
+  --tint-tc-3-3: #{$tint-tc-3-3};
+  --tint-tc-3-1-rgba: #{$tint-tc-3-1-rgba};
+  --tint-tc-3-2-rgba: #{$tint-tc-3-2-rgba};
+  --tint-tc-3-3-rgba: #{$tint-tc-3-3-rgba};
+
+  --tint-tc-4-1: #{$tint-tc-4-1};
+  --tint-tc-4-2: #{$tint-tc-4-2};
+  --tint-tc-4-3: #{$tint-tc-4-3};
+  --tint-tc-4-1-rgba: #{$tint-tc-4-1-rgba};
+  --tint-tc-4-2-rgba: #{$tint-tc-4-2-rgba};
+  --tint-tc-4-3-rgba: #{$tint-tc-4-3-rgba};
+
+  --ex-1: #{$ex-1};
+
+  --ff-barlow: #{$ff-barlow};
+  --ff-roboto: #{$ff-roboto};
+  --ff-icon: #{$ff-icon};
+  --fw-n: #{$fw-n};
+  --fw-b: #{$fw-b};
+  --fw-eb: #{$fw-eb};
+}
+
+html {
+  font-size: 16px;
+  height: 100%;
+  @apply bg-nc-6;
+}
+//overwritting chrome user user agent focus styles
+/*
+:focus {
+  outline: 0 !important;
+  @apply outline-none;
+}
+
+.focus-visible-only:focus-visible {
+  outline: none;
+  @apply outline-none;
+}
+*/
+div:focus,
+div:focus-visible {
+  outline: none;
+  @apply outline-none;
+}
+body {
+  line-height: 1.5;
+  @apply bg-nc-7 font-roboto text-14 text-nc-1 font-normal h-full max-w-screen-xl mx-auto;
+  box-shadow: 0 12px 20px 0 rgba(0, 0, 0, 0.16);
+  max-width: 1920px;
+}
+
+#root {
+  @apply sm:pt-0 sm:pb-0 h-full flex flex-col;
+}
+.container-inner {
+  @apply flex-1 overflow-y-auto;
+}
+
+.page-content-left {
+  @apply pl-12 lg:pl-32;
+}
+.page-content-right {
+  @apply pr-12 lg:pr-32;
+}
+.page-content-top {
+  @apply pt-12;
+}
+.page-content-bottom {
+  @apply pb-12;
+}
+
+.boilerplate-page {
+  @extend .page-content-left;
+  @extend .page-content-right;
+  @extend .page-content-top;
+}
+
+.client-list.inner-page {
+  height: calc(100vh - 60px);
+  .inner-top-section {
+    height: 100%;
+  }
+}
+.pdfLinks {
+  @apply mt-6 pt-6 border-t border-nc-6;
+}

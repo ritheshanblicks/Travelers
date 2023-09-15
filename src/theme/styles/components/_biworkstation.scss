@@ -1,0 +1,46 @@
+.bi-page {
+  background-position: center top;
+  background-repeat: repeat-x;
+  overflow: hidden;
+  position: relative;
+  width: 100%;
+  .bi-content {
+    min-width: 1200px;
+    min-height: 623px;
+    background-position: center top;
+    background-repeat: no-repeat;
+  }
+}
+.BiHeader {
+  min-width: 1200px;
+}
+.alert-container {
+  position: absolute;
+  border-radius: 4px;
+  @apply text-16 p-10 mb-14 border border-solid border-nc-6 bg-nc-7;
+  top: 10px;
+  right: -300px;
+  box-shadow: 1px 2px 10px -3px rgb(0 0 0 / 70%);
+  -webkit-box-shadow: 1px 2px 10px -3px rgb(0 0 0 / 70%);
+  -moz-box-shadow: 1px 2px 10px -3px rgb(0 0 0 / 70%);
+  min-width: 300px;
+  -webkit-animation: slide 0.3s forwards;
+  -webkit-animation-delay: 0s;
+  animation: slide 0.3s forwards;
+  animation-delay: 0s;
+  .alert-inner {
+    z-index: 1;
+    @apply text-14 pb-12;
+  }
+}
+@-webkit-keyframes slide {
+  100% {
+    right: 20px;
+  }
+}
+
+@keyframes slide {
+  100% {
+    right: 20px;
+  }
+}

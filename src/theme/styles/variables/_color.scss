@@ -1,0 +1,66 @@
+/* Primary Color */
+$pc-1: #e01719;
+
+/* Secondary Color */
+$sc-1: #002a47;
+
+/* Tertiary Color */
+$tc-1: #007395;
+$tc-2: #218d49;
+$tc-3: #ff9a16;
+$tc-4: #db2323;
+
+/* Neutral Color */
+$nc-1: #000000;
+$nc-2: #272a2d;
+$nc-3: #46494d;
+$nc-4: #5f5f5f;
+$nc-5: #707070;
+$nc-6: #cdcdcd;
+$nc-7: #ffffff;
+
+/* Extra Color */
+$ex-1: #f9f9fe;
+
+/* Tint Color */
+$tint-pc-1-1: mix($pc-1, white, 60%);
+$tint-pc-1-2: mix($pc-1, white, 25%);
+$tint-pc-1-3: mix($pc-1, white, 10%);
+$tint-pc-1-1-rgba: rgba($pc-1, 0.6);
+$tint-pc-1-2-rgba: rgba($pc-1, 0.25);
+$tint-pc-1-3-rgba: rgba($pc-1, 0.1);
+
+$tint-sc-1-1: mix($sc-1, white, 60%);
+$tint-sc-1-2: mix($sc-1, white, 25%);
+$tint-sc-1-3: mix($sc-1, white, 10%);
+$tint-sc-1-1-rgba: rgba($sc-1, 0.6);
+$tint-sc-1-2-rgba: rgba($sc-1, 0.25);
+$tint-sc-1-3-rgba: rgba($sc-1, 0.1);
+
+$tint-tc-1-1: mix($tc-1, white, 60%);
+$tint-tc-1-2: mix($tc-1, white, 25%);
+$tint-tc-1-3: mix($tc-1, white, 10%);
+$tint-tc-1-1-rgba: rgba($tc-1, 0.6);
+$tint-tc-1-2-rgba: rgba($tc-1, 0.25);
+$tint-tc-1-3-rgba: rgba($tc-1, 0.1);
+
+$tint-tc-2-1: mix($tc-2, white, 60%);
+$tint-tc-2-2: mix($tc-2, white, 25%);
+$tint-tc-2-3: mix($tc-2, white, 10%);
+$tint-tc-2-1-rgba: rgba($tc-2, 0.6);
+$tint-tc-2-2-rgba: rgba($tc-2, 0.25);
+$tint-tc-2-3-rgba: rgba($tc-2, 0.1);
+
+$tint-tc-3-1: mix($tc-3, white, 60%);
+$tint-tc-3-2: mix($tc-3, white, 25%);
+$tint-tc-3-3: mix($tc-3, white, 10%);
+$tint-tc-3-1-rgba: rgba($tc-3, 0.6);
+$tint-tc-3-2-rgba: rgba($tc-3, 0.25);
+$tint-tc-3-3-rgba: rgba($tc-3, 0.1);
+
+$tint-tc-4-1: mix($tc-4, white, 60%);
+$tint-tc-4-2: mix($tc-4, white, 25%);
+$tint-tc-4-3: mix($tc-4, white, 10%);
+$tint-tc-4-1-rgba: rgba($tc-4, 0.6);
+$tint-tc-4-2-rgba: rgba($tc-4, 0.25);
+$tint-tc-4-3-rgba: rgba($tc-4, 0.1);

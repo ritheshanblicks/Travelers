@@ -1,0 +1,145 @@
+/* Label Field */
+.MuiInputLabel-root {
+  @apply text-nc-3 text-16 font-roboto;
+
+  &.Mui-focused {
+    @apply text-tc-1;
+  }
+
+  &.MuiInputLabel-shrink {
+    @apply text-14;
+  }
+
+  &.Mui-error {
+    @apply text-tc-4;
+  }
+}
+
+.input-field {
+  @apply w-full mt-4;
+  .MuiOutlinedInput-adornedEnd {
+    @apply pr-0;
+  }
+  .MuiFormHelperText-contained {
+    @apply m-0;
+  }
+  /* Label */
+  .MuiInputLabel-root {
+    transform: translate(14px, 21px);
+
+    &.MuiInputLabel-shrink {
+      transform: translate(14px, -6px);
+    }
+  }
+
+  /* Input */
+  .MuiInputBase-input {
+    @apply text-nc-1 text-16 font-roboto;
+    padding: 19px 14px 18px;
+  }
+
+  /* Fieldset */
+  .MuiOutlinedInput-root {
+    @apply rounded-2;
+    .MuiOutlinedInput-notchedOutline {
+      @apply border border-solid border-nc-5;
+
+      legend {
+        @apply text-14;
+        height: 14px;
+      }
+    }
+
+    &:hover:not(.Mui-disabled) .MuiOutlinedInput-notchedOutline {
+      @apply border-sc-1;
+    }
+
+    &.Mui-focused,
+    &.Mui-focused:hover:not(.Mui-disabled) {
+      .MuiOutlinedInput-notchedOutline {
+        @apply border-2 border-tc-1;
+      }
+    }
+    &.Mui-error {
+      .MuiOutlinedInput-notchedOutline {
+        @apply border-tc-4;
+      }
+      &:hover:not(.Mui-disabled) .MuiOutlinedInput-notchedOutline {
+        @apply border-tc-4;
+      }
+      &.Mui-focused,
+      &.Mui-focused:hover:not(.Mui-disabled) {
+        .MuiOutlinedInput-notchedOutline {
+          @apply border-tc-4;
+        }
+      }
+    }
+  }
+
+  /* Small */
+  &.sm {
+    /* Label */
+    .MuiInputLabel-root {
+      @apply text-14;
+      transform: translate(14px, 13px);
+
+      &.MuiInputLabel-shrink {
+        transform: translate(14px, -6px);
+        @apply text-12;
+      }
+    }
+
+    /* Input */
+    .MuiInputBase-input {
+      @apply text-14;
+      padding: 12px 14px;
+      @media (max-width: 767px) {
+        font-size: 16px;
+      }
+    }
+
+    /* Fieldset */
+    .MuiOutlinedInput-root {
+      .MuiOutlinedInput-notchedOutline {
+        legend {
+          @apply text-12;
+          height: 12px;
+        }
+      }
+    }
+  }
+
+  &.input-no-border {
+    .MuiOutlinedInput-root .MuiOutlinedInput-notchedOutline {
+      @apply border-none;
+    }
+  }
+  &.input-border-top-bottom {
+    .MuiOutlinedInput-root {
+      @apply rounded-none;
+      &.Mui-focused,
+      &.Mui-focused:hover:not(.Mui-disabled) {
+        .MuiOutlinedInput-notchedOutline {
+          @apply border-0 border-t-2 border-b-2 border-tc-1;
+        }
+      }
+      .MuiOutlinedInput-notchedOutline {
+        @apply border-0 border-t border-b border-nc-5;
+      }
+    }
+  }
+  &.start-icon {
+    .MuiInputBase-input,
+    .MuiOutlinedInput-adornedStart {
+      @apply pl-0;
+    }
+    .MuiInputAdornment-positionStart {
+      @apply text-16 text-nc-5;
+    }
+  }
+  &.multiline {
+    .MuiFormHelperText-root {
+      color: #f44336;
+    }
+  }
+}

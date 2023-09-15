@@ -1,0 +1,46 @@
+.drawer {
+  .MuiDrawer-paper {
+    @apply absolute;
+  }
+
+  .drawer__header {
+    @apply flex items-center py-14 pl-14 pl-20 pr-20 border-b border-nc-6 justify-between;
+
+    .drawer__header__title {
+      @apply text-16 font-extra-bold font-barlow text-pc-1 mr-8;
+    }
+  }
+
+  .drawer__body {
+    @apply mt-12 ml-20 mr-20 overflow-y-auto flex-1 flex;
+  }
+
+  .MuiDrawer-paper {
+    @apply h-full w-full;
+
+    @screen sm {
+      width: 280px;
+    }
+  }
+
+  .MuiDrawer-paperAnchorRight {
+    @apply border-0 flex;
+  }
+}
+
+.drawer__header {
+  @apply flex items-center pb-8 border-b border-nc-6;
+
+  .drawer__header__title {
+    @apply text-16 font-extra-bold text-nc-2 mr-8;
+
+    span {
+      display: inline-block;
+      vertical-align: middle;
+    }
+
+    .title {
+      @apply font-barlow;
+    }
+  }
+}

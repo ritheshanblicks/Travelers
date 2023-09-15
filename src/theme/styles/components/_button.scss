@@ -1,0 +1,357 @@
+$color-list: (
+  pc-1 var(--pc-1) var(--nc-1),
+  sc-1 var(--sc-1) var(--nc-7),
+  tc-1 var(--tc-1) var(--nc-7),
+  tc-2 var(--tc-2) var(--nc-7),
+  tc-3 var(--tc-3) var(--nc-7),
+  tc-4 var(--tc-4) var(--nc-7),
+  tint-1 var(--tint-pc-1) var(--nc-7),
+  tint-2 var(--tint-pc-2) var(--nc-7),
+  tint-3 var(--tint-pc-3) var(--nc-7),
+  tint-pc-1-1 var(--tint-pc-1-1) var(--nc-7),
+  tint-pc-1-2 var(--tint-pc-1-2) var(--nc-7),
+  tint-pc-1-3 var(--tint-pc-1-3) var(--nc-7),
+  tint-sc-1-1 var(--tint-sc-1-1) var(--nc-7),
+  tint-sc-1-2 var(--tint-sc-1-2) var(--nc-7),
+  tint-sc-1-3 var(--tint-sc-1-3) var(--nc-7),
+  tint-tc-1-1 var(--tint-tc-1-1) var(--nc-7),
+  tint-tc-1-2 var(--tint-tc-1-2) var(--nc-7),
+  tint-tc-1-3 var(--tint-tc-1-3) var(--nc-7),
+  tint-tc-2-1 var(--tint-tc-2-1) var(--nc-7),
+  tint-tc-2-2 var(--tint-tc-2-2) var(--nc-7),
+  tint-tc-2-3 var(--tint-tc-2-3) var(--nc-7),
+  tint-tc-3-1 var(--tint-tc-3-1) var(--nc-7),
+  tint-tc-3-2 var(--tint-tc-3-2) var(--nc-7),
+  tint-tc-3-3 var(--tint-tc-3-3) var(--nc-7),
+  nc-1 var(--nc-1) var(--nc-7),
+  nc-2 var(--nc-2) var(--nc-7),
+  nc-3 var(--nc-3) var(--nc-7),
+  nc-4 var(--nc-4) var(--nc-7),
+  nc-5 var(--nc-5) var(--nc-7),
+  nc-6 var(--nc-6) var(--nc-7),
+  nc-7 var(--nc-7) var(--nc-7),
+  ex-1 var(--ex-1) var(--nc-7)
+);
+
+@mixin btn-contained($btn-color, $text-color) {
+  background-color: $btn-color;
+  color: $text-color;
+  --box-shadow-color: #{'var(--tint-' +
+    str-bulk-replace($btn-color, ('var(--', ')'), '') + '-2-rgba)'};
+  box-shadow: 0 3px 3px 0 var(--box-shadow-color);
+  &:hover {
+    box-shadow: 0 6px 6px 0 var(--box-shadow-color);
+  }
+}
+@mixin btn-outlined($btn-color, $text-color) {
+  color: $btn-color;
+  border: 1px solid $btn-color;
+  --box-shadow-color: #{'var(--tint-' +
+    str-bulk-replace($btn-color, ('var(--', ')'), '') + '-2-rgba)'};
+  &:hover {
+    color: $nc-7;
+    background-color: $btn-color;
+    box-shadow: 0 3px 3px 0 var(--box-shadow-color);
+  }
+  @each $value in $color-list {
+    &.btn-border-#{nth($value, 1)} {
+      border: 1px solid nth($value, 2);
+      &:hover {
+        border: 1px solid transparent;
+      }
+    }
+  }
+}
+
+/* Button Start */
+.btn {
+  @apply normal-case font-bold;
+  min-width: 80px;
+
+  @each $value in $color-list {
+    &.btn-#{nth($value, 1)}.MuiButton-contained {
+      &.MuiButton-root {
+        @apply font-barlow font-bold text-nc-7 text-14 capitalize rounded-2;
+        padding: 6px 20px;
+      }
+      &.MuiButton-sizeSmall {
+        @apply text-12;
+        padding: 5px 20px 6px;
+      }
+      &.MuiButton-sizeLarge {
+        @apply text-14;
+        padding: 7px 20px 8px;
+      }
+      @include btn-contained(nth($value, 2), nth($value, 3));
+    }
+    &.btn-#{nth($value, 1)}.MuiButton-outlined {
+      @include btn-outlined(nth($value, 2), nth($value, 3));
+      &.MuiButton-root {
+        @apply text-14 font-barlow  font-extra-bold rounded-2  capitalize border-2 shadow-none;
+        padding: 4px 19px;
+      }
+      &.MuiButton-sizeSmall {
+        @apply text-12;
+        padding: 3px 19px 4px;
+      }
+      &.MuiButton-sizeLarge {
+        @apply text-14;
+        padding: 5px 19px 6px;
+      }
+
+      @each $value in $color-list {
+        &.btn-text-#{nth($value, 1)} {
+          color: nth($value, 2);
+          &:hover {
+            @apply text-nc-7;
+          }
+        }
+      }
+    }
+  }
+
+  &.btn-sc {
+    &.MuiButton-root {
+      @apply text-12   capitalize;
+      padding: 6px 18px;
+    }
+    &.MuiButton-sizeSmall {
+      @apply text-12;
+      padding: 5px 18px;
+    }
+    &.MuiButton-sizeLarge {
+      @apply text-16;
+      padding: 6px 17px;
+    }
+    &.sc-1 {
+      @apply bg-sc-1 text-nc-7 rounded-2 font-bold;
+      box-shadow: 0 6px 6px 0 rgb($tint-sc-1-3, 1);
+      &:hover {
+        @apply shadow-none;
+      }
+    }
+    &.sc-2 {
+      @apply bg-nc-6 text-nc-3  rounded-2 font-bold font-barlow text-14;
+      box-shadow: 0 3px 3px 0 rgb($sc-1, 0.1);
+      &:hover {
+        @apply shadow-none bg-nc-5 text-nc-1;
+      }
+    }
+  }
+  &.btn-tc {
+    &.MuiButton-root {
+      @apply text-12   capitalize;
+      padding: 6px 18px;
+    }
+    &.MuiButton-sizeSmall {
+      @apply text-12;
+      padding: 5px 18px;
+    }
+    &.MuiButton-sizeLarge {
+      @apply text-16;
+      padding: 6px 17px;
+    }
+    &.tc-1 {
+      @apply bg-tc-4 text-nc-7 rounded-2;
+      box-shadow: 0 6px 6px 0 rgb($tint-tc-4-3, 1);
+      &:hover {
+        @apply shadow-none;
+      }
+    }
+  }
+
+  &.icon-btn {
+    &.MuiButton-contained {
+      &.MuiButton-root {
+        padding: 4px 16px;
+      }
+      &.MuiButton-sizeSmall {
+        padding: 3px 12px 4px;
+      }
+      &.MuiButton-sizeLarge {
+        padding: 4px 16px;
+      }
+    }
+    &.MuiButton-outlined {
+      &.MuiButton-root {
+        padding: 3px 15px;
+      }
+      &.MuiButton-sizeSmall {
+        padding: 2px 11px 3px;
+      }
+      &.MuiButton-sizeLarge {
+        padding: 3px 15px;
+      }
+    }
+    .MuiButton-iconSizeSmall > *:first-child {
+      @apply text-14;
+    }
+    .MuiButton-iconSizeMedium > *:first-child {
+      @apply text-16;
+    }
+    .MuiButton-iconSizeLarge > *:first-child {
+      @apply text-18;
+    }
+    .MuiButton-endIcon {
+      margin-left: 12px;
+    }
+    .MuiButton-endIcon.MuiButton-iconSizeMedium {
+      margin-left: 31px;
+    }
+    .MuiButton-endIcon.MuiButton-iconSizeLarge {
+      margin-left: 31px;
+    }
+  }
+
+  &.Mui-disabled {
+    @apply opacity-40;
+  }
+
+  &.w-145 {
+    width: 145px;
+  }
+  &.w-90 {
+    width: 90px;
+  }
+}
+
+.btn-link {
+  @apply text-12;
+  &.btn-link-nc-3 {
+    @apply text-nc-3;
+    &:hover {
+      @apply text-nc-1;
+    }
+  }
+  &.btn-link-nc-2 {
+    @apply text-nc-2 font-extra-bold font-barlow;
+    &:hover {
+      @apply text-nc-1;
+    }
+  }
+  &.btn-link-nc-1 {
+    @apply text-nc-1 hover:text-tc-1 focus:text-tc-1;
+  }
+  &.btn-link-tc-1 {
+    @apply text-tc-1;
+    &:hover {
+      @apply text-nc-1;
+    }
+  }
+  &.btn-link-sc-1 {
+    @apply text-sc-1;
+    &:hover {
+      @apply text-nc-1;
+    }
+  }
+  &.--text-14 {
+    @apply text-14;
+  }
+  &:disabled {
+    @apply opacity-40 pointer-events-none;
+  }
+  &.pdf-link-btn {
+    @apply text-14 text-nc-7 px-8 py-2 rounded-4 bg-sc-1 border border-transparent;
+    &:hover {
+      @apply text-sc-1 border-sc-1 bg-nc-7;
+    }
+  }
+}
+
+.btn-icon,
+.btn-icon.icon {
+  height: 36px;
+  width: 36px;
+  &:hover,
+  &:focus {
+    @apply text-sc-1 bg-tint-sc-1-3;
+  }
+  @apply text-12;
+  &.square {
+    border-radius: 2px;
+  }
+  &.xxsm {
+    height: 24px;
+    width: 24px;
+    @apply text-12;
+  }
+  &.xsm {
+    height: 28px;
+    width: 28px;
+    @apply text-16;
+  }
+  &.sm {
+    height: 32px;
+    width: 32px;
+    @apply text-16;
+    &[aria-expanded='true'] {
+      @apply text-sc-1;
+    }
+  }
+  &.md {
+    height: 36px;
+    width: 36px;
+    @apply text-18;
+  }
+  &.lg {
+    height: 40px;
+    width: 40px;
+    @apply text-18;
+  }
+  &.xlg {
+    height: 54px;
+    width: 54px;
+    @apply text-18;
+  }
+  &.btn-pc-1 {
+    box-shadow: 0 3px 3px 0 var(--tint-pc-1-2-rgba);
+    @apply text-nc-7;
+    @apply bg-pc-1;
+    &:hover {
+      box-shadow: 0 6px 6px 0 var(--tint-pc-1-2-rgba);
+      @apply bg-pc-1;
+    }
+  }
+  &.btn-tc-4 {
+    box-shadow: 0 3px 3px 0 var(--tint-tc-4-2-rgba);
+    @apply text-nc-7;
+    @apply bg-tc-4;
+    &:hover {
+      box-shadow: 0 6px 6px 0 var(--tint-tc-4-2-rgba);
+      @apply bg-tc-4;
+    }
+  }
+  &.btn-pc-1-border {
+    box-shadow: 0 -5px 6px 0 rgba($nc-1, 0.05);
+    @apply text-nc-3 bg-nc-7;
+    &:hover {
+      @apply bg-nc-7;
+    }
+  }
+  &.btn-pc-1-border-2 {
+    @apply text-nc-1 bg-nc-7 border border-solid border-pc-1;
+    &:hover {
+      box-shadow: 0 3px 6px 0 var(--tint-pc-1-2-rgba);
+      @apply bg-pc-1;
+    }
+  }
+  &.btn-nc-6 {
+    box-shadow: 0 3px 6px 0 rgba($nc-6, 0.2);
+    @apply text-tc-1;
+    @apply bg-nc-6;
+    &:hover {
+      box-shadow: 0 10px 20px 0 rgba($nc-6, 0.2);
+      @apply bg-nc-6;
+    }
+  }
+  &.Mui-disabled {
+    @apply opacity-40;
+  }
+}
+
+.btn + .btn,
+.btn-icon + .btn-icon,
+.btn-link + .btn-link {
+  @apply ml-12;
+}
+/* Button End */
