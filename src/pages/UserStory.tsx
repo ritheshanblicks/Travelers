@@ -5,8 +5,9 @@ import OutlinedInput from '@mui/material/OutlinedInput';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
-import { Button, Grid, TextField } from '@material-ui/core';
+import { Button, Grid } from '@material-ui/core';
 import { createUserStory } from '../common/services/createUserStoryService';
+import { Templates } from './userStoryjson';
 
 const ITEM_HEIGHT = 48;
 const ITEM_PADDING_TOP = 8;
@@ -19,7 +20,8 @@ const MenuProps = {
   },
 };
 
-const names = ['User Story', 'Tasks', 'Defects'];
+const templates = Templates;
+console.log(templates);
 
 function getStyles(name: string, personName: string[], theme: Theme) {
   return {
@@ -30,24 +32,17 @@ function getStyles(name: string, personName: string[], theme: Theme) {
   };
 }
 
-// const rows = [
-//   {
-//     number: 12121212,
-//     name: 'The Capital Grille',
-//     desc: 'fine-dine restaurant',
-//     website: 'https://www.thecapitalgrille.com',
-//   },
-//   {
-//     number: 73487384,
-//     name: 'Gila River Construction',
-//     desc: 'Contractor',
-//     website: 'www.gilariver.com',
-//   },
-// ];
-
 const UserStory: React.FC = () => {
   const theme = useTheme();
   const [personName, setPersonName] = React.useState<string[]>([]);
+  const [response, setResponse] = React.useState<any>();
+  const [showOutput, setShowoOutput] = React.useState<any>(false);
+  const [payload, setPayload] = React.useState<any>({
+    template: [],
+    feature: '',
+    context: '',
+    output: '',
+  });
 
   const handleChange = (event: SelectChangeEvent<typeof personName>) => {
     const {
@@ -57,13 +52,44 @@ const UserStory: React.FC = () => {
       // On autofill we get a stringified value.
       typeof value === 'string' ? value.split(',') : value
     );
+    setPayload({
+      ...payload,
+      template: typeof value === 'string' ? value.split(',') : value,
+    });
   };
   const onGenerate = () => {
-    const result = createUserStory(
-      '"""\nYou a product ownser at an insurance company. You task is to generate the user stories for the feature in <>.\n\nGuidelines: \n- Base your userstories on the context if its available\n- Create User stories based on INVEST framework\n- Create the user stories by following the output format\n\nOutput Format: \n\nUser story name: ```Name of the user story```\nTasks: ```tasks that are associated with the user story```\nAcceptance criteria: ```Provide 2-3 acceptance criteria```\n\nFollow the same format for each of the user story\n\nContext: \nProject is similar to facebook\n\n<Like/Dislike feature implementation>"""'
-    );
-    console.log(result);
+    const requestBody = `"""template:${payload.template.toString()}\nFeature:${
+      payload.feature
+    }\nContext:${payload.context}\nOutput Format:${payload.output}"""`;
+
+    console.log(requestBody);
+    const result = createUserStory(requestBody);
+    result
+      .then((res: any) => {
+        setResponse(res);
+        setShowoOutput(true);
+        setPayload({
+          ...payload,
+          output: res?.Output,
+        });
+      })
+      .catch((err) => {
+        setShowoOutput(false);
+        console.log(err);
+      });
+    console.log(response);
   };
+  const onInputChange = (event: any) => {
+    const {
+      target: { value },
+    } = event;
+    const name = event.target.name;
+    setPayload({
+      ...payload,
+      [name]: value,
+    });
+  };
+
   return (
     <div className="dt">
       <Grid container direction="row">
@@ -83,7 +109,6 @@ const UserStory: React.FC = () => {
                 <Select
                   labelId="demo-multiple-name-label"
                   id="demo-multiple-name"
-                  multiple
                   value={personName}
                   onChange={handleChange}
                   input={<OutlinedInput />}
@@ -92,7 +117,7 @@ const UserStory: React.FC = () => {
                     backgroundColor: '#fff',
                   }}
                 >
-                  {names.map((name) => (
+                  {templates.map((name: any) => (
                     <MenuItem
                       key={name}
                       value={name}
@@ -108,30 +133,20 @@ const UserStory: React.FC = () => {
               <p>
                 <label htmlFor="cars">Feature Name</label>
               </p>
-              <TextField
-                InputLabelProps={{ shrink: false }}
-                style={{
-                  backgroundColor: '#fff',
-                  width: '250px',
-                }}
-                id="outlined-basic"
-                size="small"
-                variant="outlined"
+              <textarea
+                name="feature"
+                onChange={onInputChange}
+                style={{ width: '250px', minHeight: '150px' }}
               />
             </div>
             <div style={{ margin: '10px 10px 10px 10px' }}>
               <p>
                 <label htmlFor="cars">Context</label>
               </p>
-              <TextField
-                InputLabelProps={{ shrink: false }}
-                style={{
-                  backgroundColor: '#fff',
-                  width: '250px',
-                }}
-                id="outlined-basic"
-                size="small"
-                variant="outlined"
+              <textarea
+                name="context"
+                onChange={onInputChange}
+                style={{ width: '250px', minHeight: '150px' }}
               />
               <Button
                 variant="contained"
@@ -152,7 +167,11 @@ const UserStory: React.FC = () => {
           item
           xs={6}
           md={4}
-          style={{ marginLeft: '100px', marginTop: '40px' }}
+          style={{
+            marginLeft: '100px',
+            marginTop: '40px',
+            display: showOutput ? '' : 'none',
+          }}
         >
           <p>output</p>
           <div
@@ -161,7 +180,14 @@ const UserStory: React.FC = () => {
               height: '400px',
               backgroundColor: '#fff',
             }}
-          ></div>
+          >
+            <textarea
+              name="output"
+              value={payload?.output}
+              onChange={onInputChange}
+              style={{ width: '100%', minHeight: '100%' }}
+            />
+          </div>
           <div style={{ marginRight: '20%' }}>
             <Button
               variant="contained"
