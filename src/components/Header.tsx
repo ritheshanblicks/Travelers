@@ -21,6 +21,7 @@ function BiHeader() {
 
   const open = Boolean(anchorEl);
   const id = open ? 'simple-popover' : undefined;
+  const pathName = window.location.pathname;
   return (
     <div className="header BiHeader">
       <div className="left">
@@ -49,31 +50,35 @@ function BiHeader() {
         </div> */}
         <div className="mr-12">
           <Button
-            className={
-              window.location.pathname === '/home'
-                ? 'text-12 font-extra-bold text-nc-3 active-tab'
-                : 'text-12 font-extra-bold text-nc-3'
-            }
+            style={{
+              borderBottom: pathName === '/home' ? '2px solid #f50002' : '',
+              borderRadius: pathName === '/home' ? '0px' : '',
+              backgroundColor: pathName === '/home' ? '#f8f8f8' : '',
+            }}
+            className={'text-12 font-extra-bold text-nc-3'}
             href="home"
           >
             HOME
           </Button>
           <Button
-            className={
-              window.location.pathname === '/userstory'
-                ? 'text-12 font-extra-bold text-nc-3 active-tab'
-                : 'text-12 font-extra-bold text-nc-3'
-            }
+            style={{
+              borderBottom:
+                pathName === '/userstory' ? '2px solid #f50002' : '',
+              borderRadius: pathName === '/userstory' ? '0px' : '',
+              backgroundColor: pathName === '/userstory' ? '#f8f8f8' : '',
+            }}
+            className="text-12 font-extra-bold text-nc-3"
             href="userstory"
           >
             CREATE USER STORY
           </Button>
           <Button
-            className={
-              window.location.pathname === '/settings'
-                ? 'text-12 font-extra-bold text-nc-3 active-tab'
-                : 'text-12 font-extra-bold text-nc-3'
-            }
+            style={{
+              borderBottom: pathName === '/settings' ? '2px solid #f50002' : '',
+              borderRadius: pathName === '/settings' ? '0px' : '',
+              backgroundColor: pathName === '/settings' ? '#f8f8f8' : '',
+            }}
+            className="text-12 font-extra-bold text-nc-3"
             href="settings"
           >
             SETTINGS

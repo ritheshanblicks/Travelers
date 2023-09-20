@@ -5,12 +5,16 @@ import OutlinedInput from '@mui/material/OutlinedInput';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
-import { Button, Grid } from '@material-ui/core';
+import { Button, Grid, TextField } from '@material-ui/core';
 import { createUserStory } from '../common/services/createUserStoryService';
-import { Templates } from './userStoryjson';
+import templates from './userStoryjson.json';
+import Loader from './Loader';
+import Toast, { SUCCESS_TOAST, ERROR_TOAST } from '../components/layouts/Toast';
 
 const ITEM_HEIGHT = 48;
+
 const ITEM_PADDING_TOP = 8;
+
 const MenuProps = {
   PaperProps: {
     style: {
@@ -19,9 +23,6 @@ const MenuProps = {
     },
   },
 };
-
-const templates = Templates;
-console.log(templates);
 
 function getStyles(name: string, personName: string[], theme: Theme) {
   return {
@@ -35,14 +36,18 @@ function getStyles(name: string, personName: string[], theme: Theme) {
 const UserStory: React.FC = () => {
   const theme = useTheme();
   const [personName, setPersonName] = React.useState<string[]>([]);
+  const [showOutput, setShowOutput] = React.useState<any>(false);
+  const [enableEdit, setEnableEdit] = React.useState<any>(false);
+  const [loader, setLoader] = React.useState<any>(false);
   const [response, setResponse] = React.useState<any>();
-  const [showOutput, setShowoOutput] = React.useState<any>(false);
   const [payload, setPayload] = React.useState<any>({
-    template: [],
+    template: '',
     feature: '',
     context: '',
     output: '',
   });
+
+  console.log(response);
 
   const handleChange = (event: SelectChangeEvent<typeof personName>) => {
     const {
@@ -54,46 +59,57 @@ const UserStory: React.FC = () => {
     );
     setPayload({
       ...payload,
-      template: typeof value === 'string' ? value.split(',') : value,
+      template: typeof value === 'string' ? value.split(',') : value.toString(),
     });
   };
-  const onGenerate = () => {
-    const requestBody = `"""template:${payload.template.toString()}\nFeature:${
-      payload.feature
-    }\nContext:${payload.context}\nOutput Format:${payload.output}"""`;
 
-    console.log(requestBody);
-    const result = createUserStory(requestBody);
-    result
-      .then((res: any) => {
-        setResponse(res);
-        setShowoOutput(true);
-        setPayload({
-          ...payload,
-          output: res?.Output,
-        });
-      })
-      .catch((err) => {
-        setShowoOutput(false);
-        console.log(err);
-      });
-    console.log(response);
-  };
   const onInputChange = (event: any) => {
-    const {
-      target: { value },
-    } = event;
-    const name = event.target.name;
+    const { name, value } = event.target;
     setPayload({
       ...payload,
       [name]: value,
     });
   };
 
+  const onGenerate = () => {
+    const requestBody = `"""\ntemplate:${payload.template}\nfeature:${payload.feature}\ncontext:${payload.context}\nOutput Format:${payload.output}"""`;
+    console.log(requestBody);
+    const payload1 = {
+      prompt: requestBody,
+    };
+    setLoader(true);
+    const result = createUserStory(payload1);
+    result
+      .then((res) => {
+        Toast('Success', SUCCESS_TOAST);
+        setResponse(res);
+        setShowOutput(true);
+        setPayload({
+          ...payload,
+          output: res,
+        });
+        setLoader(false);
+      })
+      .catch((err) => {
+        Toast('error', ERROR_TOAST);
+        console.log(err);
+        setShowOutput(false);
+        setLoader(false);
+      });
+  };
+
+  const onSaveOutput = () => {
+    setEnableEdit(!enableEdit);
+    if (enableEdit) {
+      onGenerate();
+    }
+  };
+
   return (
     <div className="dt">
-      <Grid container direction="row">
-        <Grid item xs={6} md={4} style={{ margin: '5%' }}>
+      {loader && <Loader />}
+      <Grid container direction="row" justifyContent="center">
+        <Grid item xs={6} md={4} style={{ marginTop: '3%' }}>
           <div>
             <div style={{ margin: '10px 10px 10px 10px' }}>
               <p>
@@ -102,7 +118,7 @@ const UserStory: React.FC = () => {
               <FormControl
                 size="small"
                 sx={{
-                  width: 250,
+                  width: '100%',
                 }}
               >
                 {/* <InputLabel id="demo-multiple-name-label">Templates</InputLabel> */}
@@ -117,13 +133,13 @@ const UserStory: React.FC = () => {
                     backgroundColor: '#fff',
                   }}
                 >
-                  {templates.map((name: any) => (
+                  {templates.map((temp) => (
                     <MenuItem
-                      key={name}
-                      value={name}
-                      style={getStyles(name, personName, theme)}
+                      key={temp.name}
+                      value={temp.name}
+                      style={getStyles(temp.name, personName, theme)}
                     >
-                      {name}
+                      {temp.name}
                     </MenuItem>
                   ))}
                 </Select>
@@ -131,26 +147,35 @@ const UserStory: React.FC = () => {
             </div>
             <div style={{ margin: '10px 10px 10px 10px' }}>
               <p>
-                <label htmlFor="cars">Feature Name</label>
+                <label htmlFor="cars">Feature</label>
               </p>
-              <textarea
+              <TextField
                 name="feature"
-                onChange={onInputChange}
-                style={{ width: '250px', minHeight: '150px' }}
+                style={{ width: '100%', backgroundColor: '#ffff' }}
+                id="filled-multiline-static"
+                multiline
+                onChange={(e: any) => onInputChange(e)}
+                rows={6}
+                variant="filled"
               />
             </div>
             <div style={{ margin: '10px 10px 10px 10px' }}>
               <p>
                 <label htmlFor="cars">Context</label>
               </p>
-              <textarea
+              <TextField
                 name="context"
-                onChange={onInputChange}
-                style={{ width: '250px', minHeight: '150px' }}
+                style={{ width: '100%', backgroundColor: '#ffff' }}
+                id="filled-multiline-static"
+                multiline
+                onChange={(e: any) => onInputChange(e)}
+                rows={6}
+                variant="filled"
               />
               <Button
                 variant="contained"
                 style={{
+                  margin: '10px',
                   backgroundColor: 'rgb(245, 0, 2)',
                   color: '#fff',
                   float: 'right',
@@ -162,7 +187,6 @@ const UserStory: React.FC = () => {
             </div>
           </div>
         </Grid>
-
         <Grid
           item
           xs={6}
@@ -177,15 +201,19 @@ const UserStory: React.FC = () => {
           <div
             style={{
               border: '1px solid',
-              height: '400px',
               backgroundColor: '#fff',
             }}
           >
-            <textarea
+            <TextField
+              disabled={!enableEdit}
               name="output"
-              value={payload?.output}
-              onChange={onInputChange}
-              style={{ width: '100%', minHeight: '100%' }}
+              value={payload.output}
+              style={{ width: '100%' }}
+              id="filled-multiline-static"
+              multiline
+              onChange={(e: any) => onInputChange(e)}
+              rows={25}
+              variant="filled"
             />
           </div>
           <div style={{ marginRight: '20%' }}>
@@ -202,6 +230,7 @@ const UserStory: React.FC = () => {
             </Button>
             <Button
               variant="contained"
+              onClick={onSaveOutput}
               style={{
                 backgroundColor: 'rgb(245, 0, 2)',
                 color: '#fff',
@@ -209,7 +238,7 @@ const UserStory: React.FC = () => {
                 margin: '10px 20px 30px',
               }}
             >
-              EDIT
+              {enableEdit ? 'SAVE' : 'EDIT'}
             </Button>
           </div>
         </Grid>

@@ -5,7 +5,8 @@ import OutlinedInput from '@mui/material/OutlinedInput';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
-import { Button, Grid } from '@material-ui/core';
+import { Button, Grid, TextField } from '@material-ui/core';
+import templates from './userStoryjson.json';
 
 const ITEM_HEIGHT = 48;
 const ITEM_PADDING_TOP = 8;
@@ -17,8 +18,6 @@ const MenuProps = {
     },
   },
 };
-
-const names = ['User Story', 'Tasks', 'Defects'];
 
 function getStyles(name: string, personName: string[], theme: Theme) {
   return {
@@ -33,6 +32,9 @@ const Settings: React.FC = () => {
   const theme = useTheme();
   const [personName, setPersonName] = React.useState<string[]>([]);
 
+  const [enableEdit, setEnableEdit] = React.useState<any>(false);
+  const [templateDescription, setTemplateDescription] = React.useState<any>('');
+
   const handleChange = (event: SelectChangeEvent<typeof personName>) => {
     const {
       target: { value },
@@ -41,7 +43,15 @@ const Settings: React.FC = () => {
       // On autofill we get a stringified value.
       typeof value === 'string' ? value.split(',') : value
     );
+    setTemplateDescription('description');
   };
+  const onSaveOutput = () => {
+    setEnableEdit(!enableEdit);
+  };
+  const onDescriptionChange = (e: any) => {
+    setTemplateDescription(e.target.value);
+  };
+
   return (
     <div>
       <Grid container direction="row" justifyContent="center">
@@ -53,14 +63,13 @@ const Settings: React.FC = () => {
             <FormControl
               size="small"
               sx={{
-                width: 250,
+                width: '100%',
               }}
             >
               {/* <InputLabel id="demo-multiple-name-label">Templates</InputLabel> */}
               <Select
                 labelId="demo-multiple-name-label"
                 id="demo-multiple-name"
-                multiple
                 value={personName}
                 onChange={handleChange}
                 input={<OutlinedInput />}
@@ -69,13 +78,13 @@ const Settings: React.FC = () => {
                   backgroundColor: '#fff',
                 }}
               >
-                {names.map((name) => (
+                {templates.map((temp) => (
                   <MenuItem
-                    key={name}
-                    value={name}
-                    style={getStyles(name, personName, theme)}
+                    key={temp.name}
+                    value={temp.name}
+                    style={getStyles(temp.name, personName, theme)}
                   >
-                    {name}
+                    {temp.name}
                   </MenuItem>
                 ))}
               </Select>
@@ -86,19 +95,19 @@ const Settings: React.FC = () => {
             <p>
               <label htmlFor="cars">Template Description</label>
             </p>
-            <textarea style={{ width: '250px', minHeight: '200px' }} />
+            <TextField
+              disabled={!enableEdit}
+              value={templateDescription}
+              onChange={onDescriptionChange}
+              name="context"
+              style={{ width: '100%', backgroundColor: '#ffff' }}
+              id="filled-multiline-static"
+              multiline
+              rows={6}
+              variant="filled"
+            />
           </div>
           <div style={{ marginRight: '20%' }}>
-            {/* <Button
-              variant="contained"
-              style={{
-                backgroundColor: 'rgb(245, 0, 2)',
-                color: '#fff',
-                margin: '10px 20px 30px',
-              }}
-            >
-              EDIT
-            </Button> */}
             <Button
               variant="contained"
               style={{
@@ -106,8 +115,9 @@ const Settings: React.FC = () => {
                 color: '#fff',
                 margin: '10px 20px 30px',
               }}
+              onClick={onSaveOutput}
             >
-              SAVE
+              {enableEdit ? 'SAVE' : 'EDIT'}
             </Button>
           </div>
         </Grid>
