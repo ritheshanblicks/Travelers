@@ -5,10 +5,12 @@ import OutlinedInput from '@mui/material/OutlinedInput';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
-import { Button, Grid, TextField } from '@material-ui/core';
+import { Button, Grid, IconButton, TextField } from '@material-ui/core';
 import { createUserStory } from '../common/services/createUserStoryService';
 import templates from './userStoryjson.json';
 import Loader from './Loader';
+// import IconButton from '@mui/material/IconButton';
+import FileDownloadIcon from '@mui/icons-material/FileDownload';
 import Toast, { SUCCESS_TOAST, ERROR_TOAST } from '../components/layouts/Toast';
 
 const ITEM_HEIGHT = 48;
@@ -105,6 +107,20 @@ const UserStory: React.FC = () => {
     }
   };
 
+  const onDownload = () => {
+    const url = window.URL.createObjectURL(
+      new Blob([payload.output], {
+        type: 'application/pdf',
+      })
+    );
+    const link = document.createElement('a');
+    link.href = url;
+    link.setAttribute('download', 'Template');
+    document.body.appendChild(link);
+    link.click();
+    link.remove();
+  };
+
   return (
     <div className="dt">
       {loader && <Loader />}
@@ -136,7 +152,7 @@ const UserStory: React.FC = () => {
                   {templates.map((temp) => (
                     <MenuItem
                       key={temp.name}
-                      value={temp.name}
+                      value={temp.description}
                       style={getStyles(temp.name, personName, theme)}
                     >
                       {temp.name}
@@ -216,30 +232,42 @@ const UserStory: React.FC = () => {
               variant="filled"
             />
           </div>
-          <div style={{ marginRight: '20%' }}>
-            <Button
-              variant="contained"
-              style={{
-                backgroundColor: 'rgb(245, 0, 2)',
-                color: '#fff',
-                float: 'right',
-                margin: '10px 20px 30px',
-              }}
-            >
-              COPY
-            </Button>
+          <div
+            style={{
+              marginRight: '10%',
+              float: 'right',
+            }}
+          >
             <Button
               variant="contained"
               onClick={onSaveOutput}
               style={{
                 backgroundColor: 'rgb(245, 0, 2)',
                 color: '#fff',
-                float: 'right',
                 margin: '10px 20px 30px',
               }}
             >
               {enableEdit ? 'SAVE' : 'EDIT'}
             </Button>
+            <Button
+              variant="contained"
+              style={{
+                backgroundColor: 'rgb(245, 0, 2)',
+                color: '#fff',
+                margin: '10px 20px 30px',
+              }}
+            >
+              COPY
+            </Button>
+            <IconButton
+              style={{
+                color: '#000000',
+                margin: '10px 20px 30px',
+              }}
+              onClick={onDownload}
+            >
+              <FileDownloadIcon />
+            </IconButton>
           </div>
         </Grid>
       </Grid>
